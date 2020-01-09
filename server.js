@@ -10,6 +10,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
+app.use(express.static("public2"));
 
 // SET STORAGE
 var storage = multer.diskStorage({
@@ -24,7 +25,7 @@ var storage = multer.diskStorage({
   }
 });
 
-var upload = multer({ storage: storage });
+var upload = multer({ storage });
 
 app.post("/uploadfile", upload.single("myFile"), (req, res, next) => {
   const file = req.file;
@@ -33,9 +34,10 @@ app.post("/uploadfile", upload.single("myFile"), (req, res, next) => {
     error.httpStatusCode = 400;
     return next(error);
   }
-  console.log(file.filename);
-  res.contentType("image/jpeg");
-  res.send(req.file.destination + "/" + req.file.filename);
+
+  // res.sendFile(file.destination + "/" + file.filename);
+
+  res.send(`<img src='uploads/${file.filename}'/>`);
 });
 
 // Uploading multiple files

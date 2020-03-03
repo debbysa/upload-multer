@@ -4,15 +4,18 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const multer = require("multer");
 const path = require("path");
+//require database connection
+require("./utils/database");
 //CREATE EXPRESS APP
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
-app.use(express.static("public2"));
+// app.use(express.static("public2"));
 
 // SET STORAGE
+let fileName1;
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, "public/uploads");
@@ -20,7 +23,8 @@ var storage = multer.diskStorage({
   filename: function(req, file, cb) {
     cb(
       null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+      (fileName1 =
+        file.fieldname + "-" + Date.now() + path.extname(file.originalname))
     );
   }
 });

@@ -24,7 +24,7 @@ let upload = multer({ storage });
 router.get("/", noteController.index);
 router.post(
   "/",
-  upload.array("myFiles", 12),
+  upload.array("gambar", 12),
   (req, res, next) => {
     const files = req.files;
     if (!files) {
@@ -32,7 +32,7 @@ router.post(
       error.httpStatusCode = 400;
       return next(error);
     }
-    console.log(req.files);
+    // console.log(req.files);
     // res.send(files);
     next();
   },

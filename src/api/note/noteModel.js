@@ -17,6 +17,9 @@ const note = sequelize.define(
     },
     gambar: {
       type: Sequelize.STRING(300)
+    },
+    foto: {
+      type: Sequelize.STRING(300)
     }
   },
   { timestamps: false, tableName: "note" }

@@ -7,8 +7,18 @@ module.exports = {
     });
   },
   store: function(req, res) {
-    Note.create(req.body).then(function(row) {
-      res.json(row);
+    console.log(req.files[0].path);
+    Note.create({
+      judul: req.body.judul,
+      isi: req.body.isi,
+      gambar: req.files === undefined ? "" : req.files[0].path,
+      foto: req.files === undefined ? "" : req.files[1].path
+    }).then(newNote => {
+      res.json({
+        status: "success",
+        message: "Note added",
+        data: newNote
+      });
     });
   }
 };

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const noteController = require("./noteController");
 const multer = require("multer");
+//untuk menambahkan path
 const path = require("path");
 
 // SET STORAGE
